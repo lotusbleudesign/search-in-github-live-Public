@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Test {
+  nom               String   @unique
+  prenom             String   @unique
+}
+
+model User {
+
+  user_id             Int       @id @default(autoincrement())
+  login               String    @unique
+  id                  Int
+  node_id             String?
+  avatar_url          String?
+  gravatar_id         String?
+  url                 String?
+  html_url            String?
+  followers_url       String?
+  following_url       String?
+  gists_url           String??
+  starred_url         String??
+  subscriptions_url   String?
+  organizations_url   String?
+  repos_url           String?
+  events_url          String?
+  received_events_url String?
+  type                String?
+  site_admin          Boolean
+  name                String?
+  company             String?
+  blog                String?
+  location            String?
+  email               String?
+  bio                 String?
+  twitter_username    String??
+  hireable            String??
+  public_repos        Int
+  repos               Repos[]
+  public_gists        Int
+  followers           Int
+  following           Int
+  created_at          DateTime
+  updated_at          DateTime
+}
+
+model Repos {
+
+    repos_id        Int       @id @default(autoincrement())
+    user            User      User @relation(fields: [user_id], references: [user_id])
+    user_id         Int
+    id              Int
+    node_id:        String?
+    name            String?
+    full_name       String?
+    private         Boolean
+    owner           String?
+    language        String?
+    created_at      DateTime
+    updated_at      DateTime
+    pushed_at       DateTime
+}
