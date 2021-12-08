@@ -20,5 +20,5 @@ web-build/
 #token
 client/env.js
 
-#migration db
+#migration db delete
 server/prisma/migrations/
