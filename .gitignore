@@ -19,3 +19,6 @@ web-build/
 
 #token
 client/env.js
+
+#migration db
+server/prisma/migrations/
