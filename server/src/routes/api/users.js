@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { PrismaClient } from '@prisma/client';
 
-
 require('dotenv').config();
 const myToken = process.env.USER_TOKEN
 
@@ -9,10 +8,7 @@ const   api = Router(),
         prisma = new PrismaClient(),
         request = require('request'),
         GitHub = require('github-api'),
-        gh = new GitHub( {
-        token: myToken
-        }
-        );
+        gh = new GitHub( { token: myToken });
 
 
 api.get("/search", async (request, response) => {
@@ -28,7 +24,6 @@ api.get("/search", async (request, response) => {
         })
     } catch {}
 
-    // if not found
     if ( user == null ) {
         // Need to fetch user data from github
         var userRequester = gh.getUser(login);
