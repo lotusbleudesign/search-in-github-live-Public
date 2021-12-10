@@ -1,0 +1,31 @@
+import * as React from 'react';
+import { View, TextInput, Button, Image } from 'react-native';
+import apiGithub from '../api/github';
+
+const styles = require('../stylesheet/stylesheet');
+
+/**
+ *        iconName: 'github-alt',
+        iconType: 'FontAwesome'
+ * @returns 
+ */
+export default function SearchScreen() {
+  const [searchUser, setsearchUser] = useState("");
+
+  return (
+    <View style={styles.screen} >
+      <Image
+        style={styles.tinyLogo}
+        source={require('@expo/snack-static/react-native-logo.png')}
+      />
+      <TextInput style={styles.text} value="Search"></TextInput>
+      <Button
+        onPress={setsearchUser}
+        title="Search"
+        color="#841584"
+      />
+      <StatusBar style="auto" />
+    </View>
+
+  )
+}

@@ -1,0 +1,84 @@
+import * as React from 'react';
+import { StatusBar } from 'expo-status-bar';
+import { Text, View } from 'react-native';
+import { env } from "./env";
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
+import DrawerItems from './shared/DrawerItems';
+import 'react-native-gesture-handler';
+import AboutScreen from './components/AboutScreen';
+import SearchScreen from './components/SearchScreen';
+import ListUserScreen from './components/ListUserScreen';
+
+const Drawer = createDrawerNavigator();
+
+export default function App() {
+
+  // const fetchUser = async (username) => {
+  //   // const response = await fetch(`http://5707-82-124-194-242.ngrok.io/api/users/${username}`);
+  //   const response = await fetch(`https://api.github.com/users/${username}`);
+
+  //   headers: {
+  //     Authorization: "token" + env.token;
+  //   }
+
+  //   if (response) {
+  //     const data = await response.json();
+  //     console.log(data);
+  //   }
+  // }
+
+  // fetchUser("lotusbleudesign");
+
+
+  // return (
+  //   <View style={styles.container}>
+  //     <Text>Hello</Text>
+  //     <StatusBar style="auto" />
+  //   </View>
+  // );
+
+  return (
+    <NavigationContainer>
+      <Drawer.Navigator
+        drawerType="front"
+        initialRouteName="Search"
+        screenOptions={{
+          activeTintColor: '#e91e63',
+          itemStyle: { marginVertical: 10 },
+        }}
+      >
+        {DrawerItems.map(drawer =>
+          <Drawer.Screen
+            key={drawer.name}
+            name={drawer.name}
+            options={{
+              drawerIcon: ({ focused }) => {
+                switch (drawer.iconType) {
+                  case 'MaterialCommunity':
+                    return (
+                      < MaterialCommunityIcons name={drawer.iconName} size={24} color={focused ? "#e91e63" : "black"} />)
+                  case 'AntDesign':
+                    return (
+                      <AntDesign name={drawer.iconName} size={24} color={focused ? "#e91e63" : "black"} />)
+                  case 'Material':
+                    return (
+                      <MaterialIcons name={drawer.iconName} size={24} color={focused ? "#e91e63" : "black"} />)
+                }
+              }
+            }}
+            component={
+              drawer.name === 'Search' ? component = { SearchScreen }
+                : drawer.name === 'ListUser' ? component = { ListUserScreen }
+                  : drawer.name === 'About' ? component = { AboutScreen } : component = { SearchScreen }}
+          />
+        )}
+      </Drawer.Navigator>
+    </NavigationContainer>
+  );
+}
+
