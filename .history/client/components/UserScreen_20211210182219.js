@@ -1,0 +1,24 @@
+import * as React from 'react';
+import { useState } from 'react';
+import { Text, ScrollView, View, Image } from 'react-native';
+import { Avatar } from 'react-native-elements';
+import styles from '../stylesheet/stylesheet';
+import { Card, ListItem, Button, Icon } from 'react-native-elements'
+
+export default function UserScreen({ navigation, route }) {
+
+  const user = route.params.user;
+  console.log(user);
+  //console.log(" ==> ", user, user.user.avatar_url)
+  return (
+
+    <Card>
+      <Image
+        style={styles.tinyLogo}
+        source={{ uri: user.user.avatar_url }} />
+      <Card.Title style={styles.text}>{user.user.login}</Card.Title>
+      <Card.Divider />
+
+    </Card>
+  )
+}
